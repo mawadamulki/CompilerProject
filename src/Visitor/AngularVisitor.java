@@ -860,6 +860,22 @@ public class AngularVisitor extends AngularParserBaseVisitor {
     }
 
     @Override
+    public StyleElement visitStyleElementPadding(AngularParser.StyleElementPaddingContext ctx) {
+        return visitStylePadding(ctx.stylePadding());
+    }
+
+    @Override
+    public StyleElement visitStylePadding(AngularParser.StylePaddingContext ctx) {
+        StyleElementPadding styleElementPadding = new StyleElementPadding();
+
+        styleElementPadding.setNumber1(ctx.NUMBER(0).getText());
+        if(ctx.NUMBER(1) != null)
+            styleElementPadding.setNumber2(ctx.NUMBER(1).getText());
+
+        return styleElementPadding;
+    }
+
+    @Override
     public StyleElement visitStyleElementNumber(AngularParser.StyleElementNumberContext ctx) {
         return visitStyleNumber(ctx.styleNumber());
     }

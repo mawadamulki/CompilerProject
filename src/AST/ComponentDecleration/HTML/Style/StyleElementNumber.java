@@ -42,12 +42,11 @@ public class StyleElementNumber implements StyleElement {
         StringBuilder sb = new StringBuilder();
         sb.append(identifier).append(": ");
 
-        sb.append(number).append(" ");
+        sb.append(number);
 
             for( int j = 0 ; j< extentions.size() ; j++) {
-
-                sb.append(extentions.get(j).toString());
                 sb.append(" ");
+                sb.append(extentions.get(j).toString());
             }
 
 

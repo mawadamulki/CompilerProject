@@ -538,6 +538,18 @@ public interface AngularParserListener extends ParseTreeListener {
 	 */
 	void exitStyleElementOnly(AngularParser.StyleElementOnlyContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code styleElementPadding}
+	 * labeled alternative in {@link AngularParser#styleElement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStyleElementPadding(AngularParser.StyleElementPaddingContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code styleElementPadding}
+	 * labeled alternative in {@link AngularParser#styleElement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStyleElementPadding(AngularParser.StyleElementPaddingContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link AngularParser#styleAssign}.
 	 * @param ctx the parse tree
 	 */
@@ -637,6 +649,16 @@ public interface AngularParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStyleOnly(AngularParser.StyleOnlyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AngularParser#stylePadding}.
+	 * @param ctx the parse tree
+	 */
+	void enterStylePadding(AngularParser.StylePaddingContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AngularParser#stylePadding}.
+	 * @param ctx the parse tree
+	 */
+	void exitStylePadding(AngularParser.StylePaddingContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AngularParser#click}.
 	 * @param ctx the parse tree

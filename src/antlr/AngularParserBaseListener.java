@@ -581,6 +581,18 @@ public class AngularParserBaseListener implements AngularParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterStyleElementPadding(AngularParser.StyleElementPaddingContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStyleElementPadding(AngularParser.StyleElementPaddingContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterStyleAssign(AngularParser.StyleAssignContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -684,6 +696,18 @@ public class AngularParserBaseListener implements AngularParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStyleOnly(AngularParser.StyleOnlyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStylePadding(AngularParser.StylePaddingContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStylePadding(AngularParser.StylePaddingContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

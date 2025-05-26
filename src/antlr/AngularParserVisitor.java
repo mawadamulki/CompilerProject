@@ -323,6 +323,13 @@ public interface AngularParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStyleElementOnly(AngularParser.StyleElementOnlyContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code styleElementPadding}
+	 * labeled alternative in {@link AngularParser#styleElement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStyleElementPadding(AngularParser.StyleElementPaddingContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link AngularParser#styleAssign}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -381,6 +388,12 @@ public interface AngularParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStyleOnly(AngularParser.StyleOnlyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AngularParser#stylePadding}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStylePadding(AngularParser.StylePaddingContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AngularParser#click}.
 	 * @param ctx the parse tree

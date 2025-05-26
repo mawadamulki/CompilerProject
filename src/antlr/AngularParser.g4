@@ -109,10 +109,11 @@ styling:
     STYLE ASSIGN DQUOTE styleElement* DQUOTE;
 
 styleElement
-    :styleAssign  # styleElementAssign
-    |styleNumber  # styleElementNumber
-    |styleColor   # styleElementColor
-    |styleOnly    # styleElementOnly
+    :styleAssign   # styleElementAssign
+    |styleNumber   # styleElementNumber
+    |styleColor    # styleElementColor
+    |styleOnly     # styleElementOnly
+    |stylePadding  # styleElementPadding
     ;
 
 styleAssign:
@@ -134,6 +135,9 @@ extention
 
 styleOnly:
     IDENTIFIER SEMI;
+
+stylePadding:
+    PADDING COLON NUMBER PIXIL (NUMBER PIXIL)? SEMI;
 
 click:
     LPAREN CLICK RPAREN ASSIGN DQUOTE functionCall DQUOTE;

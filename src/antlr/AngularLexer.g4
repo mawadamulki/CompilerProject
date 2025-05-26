@@ -27,6 +27,7 @@ IMG          : 'img';
 TYPE         : 'type';
 INPUT        : 'input';
 PLACEHOLDER  :'placeholder';
+PADDING      :'padding';
 
 LBRACE       : '{';
 RBRACE       : '}';
