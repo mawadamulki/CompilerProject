@@ -17,7 +17,7 @@ public class Main {
         System.out.println("Hello mawada you are fantastic!");
 
 
-        String source = "C:\\Users\\ROG STRIX\\IdeaProjects\\Compiler1ProjectComplete\\src\\samples\\sample3";
+        String source = "C:\\Users\\ROG STRIX\\IdeaProjects\\Compiler1ProjectComplete\\src\\samples\\sampleForSelectorCollisionError";
         CharStream cs = fromFileName(source);
         AngularLexer lexer = new AngularLexer(cs);
         CommonTokenStream token = new CommonTokenStream(lexer);

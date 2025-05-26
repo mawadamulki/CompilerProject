@@ -7,6 +7,7 @@ import AST.ComponentDecleration.HTML.*;
 import AST.ComponentDecleration.HTML.Style.*;
 import antlr.AngularParser;
 import antlr.AngularParserBaseVisitor;
+import SemanticErrors.*;
 
 
 import java.util.List;
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 
 
 public class AngularVisitor extends AngularParserBaseVisitor {
+
+    SelectorCollisionsSymbolTable selectorCollisionsSymbolTable = new SelectorCollisionsSymbolTable();
 
     @Override
     public App visitApp(AngularParser.AppContext ctx) {
@@ -410,6 +413,20 @@ public class AngularVisitor extends AngularParserBaseVisitor {
     public ComponentData visitSelector(AngularParser.SelectorContext ctx) {
         ComponentSelector componentSelector = new ComponentSelector();
         componentSelector.setString(ctx.STRING().getText());
+
+        // Check Selector Collision Error And Add If It don't Exist to Symbol Table
+        boolean checkSelectorError = selectorCollisionsSymbolTable.checkIfExist(ctx.STRING().getText());
+        if(checkSelectorError){
+            SelectorCollisionsException error = new SelectorCollisionsException(
+                    ctx.STRING().getText(),
+                    ctx.start.getLine(),
+                    ctx.start.getCharPositionInLine());
+
+            ErrorHandler.logSelectorCollision(error);
+        }
+        else
+            selectorCollisionsSymbolTable.addItem(ctx.STRING().getText());
+
         return componentSelector;
     }
 

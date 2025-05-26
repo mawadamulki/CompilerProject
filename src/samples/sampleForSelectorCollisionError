@@ -1,0 +1,80 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-root',
+  standalone: true
+})
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div style="
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background-color: #f7fafc;
+    ">
+      <h1 style="
+        font-size: 72px;
+        color: #2d3748;
+        margin: 0;
+        padding: 20px;
+      ">
+        {{ count }}
+      </h1>
+
+      <div style="display: flex; gap: 10px;">
+        <button
+          (click)="decrement()"
+          style="
+            padding: 10px 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #fc8181;
+            color: white;
+            cursor: pointer;
+            min-width: 80px;
+          "
+        >-</button>
+
+        <button
+          (click)="increment()"
+          style="
+            padding: 10px 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #68d391;
+            color: white;
+            cursor: pointer;
+            min-width: 80px;
+          "
+        >+</button>
+      </div>
+    </div>
+  `
+})
+export class AppComponent {
+  count = 0;
+
+  increment() {
+    this.count++;
+  }
+
+  decrement() {
+    this.count--;
+  }
+
+  reset() {
+    this.count = 0;
+  }
+}
+
+
