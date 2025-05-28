@@ -16,6 +16,7 @@ public class AngularVisitor extends AngularParserBaseVisitor {
 
     SelectorCollisionsSymbolTable selectorCollisionsSymbolTable = new SelectorCollisionsSymbolTable();
     TemplateMissingSymbolTable templateMissingSymbolTable = new TemplateMissingSymbolTable();
+    BindingErrorSymbolTable  bindingErrorSymbolTable = new BindingErrorSymbolTable();
 
 
     @Override
@@ -35,6 +36,18 @@ public class AngularVisitor extends AngularParserBaseVisitor {
                 app.getAppContent().add(content);
             }
         }
+
+        boolean error = bindingErrorSymbolTable.checkError();
+        if(error){
+            BindingErrorException errors = new BindingErrorException(
+                    bindingErrorSymbolTable.getName(),
+                    ctx.start.getLine(),
+                    ctx.start.getCharPositionInLine()
+            );
+
+            ErrorHandler.logBindingError(errors);
+        }
+
 
         //System.out.println(app.toString());
 
@@ -187,6 +200,8 @@ public class AngularVisitor extends AngularParserBaseVisitor {
         ClassBodyVariable classBodyVariable = new ClassBodyVariable();
 
         classBodyVariable.setIdentifier(ctx.IDENTIFIER().getText());
+        bindingErrorSymbolTable.addItemvarClass(ctx.IDENTIFIER().getText());
+
         classBodyVariable.setExpression((Expression) visit(ctx.expression()));
 
         return classBodyVariable;
@@ -639,6 +654,8 @@ public class AngularVisitor extends AngularParserBaseVisitor {
     public TagBody visitTagBodyExpression(AngularParser.TagBodyExpressionContext ctx) {
         TagBodyExpression tagBodyExpression = new TagBodyExpression();
         tagBodyExpression.setExpression((Expression) visit(ctx.expression()));
+
+        bindingErrorSymbolTable.addItemVarComponent(tagBodyExpression.getExpression().toString());
         return tagBodyExpression;
     }
 
