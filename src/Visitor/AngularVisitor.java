@@ -16,7 +16,11 @@ public class AngularVisitor extends AngularParserBaseVisitor {
 
     SelectorCollisionsSymbolTable selectorCollisionsSymbolTable = new SelectorCollisionsSymbolTable();
     TemplateMissingSymbolTable templateMissingSymbolTable = new TemplateMissingSymbolTable();
+<<<<<<< HEAD
     BindingErrorSymbolTable  bindingErrorSymbolTable = new BindingErrorSymbolTable();
+=======
+    FunctionCallErrorSymbolTable functionCallErrorSymbolTable =new FunctionCallErrorSymbolTable();
+>>>>>>> b8b033330c02b5d4b4abb1409c6b13ebf666ea47
 
 
     @Override
@@ -37,6 +41,7 @@ public class AngularVisitor extends AngularParserBaseVisitor {
             }
         }
 
+<<<<<<< HEAD
         boolean error = bindingErrorSymbolTable.checkError();
         if(error){
             BindingErrorException errors = new BindingErrorException(
@@ -49,6 +54,17 @@ public class AngularVisitor extends AngularParserBaseVisitor {
         }
 
 
+=======
+        boolean tamaraError=functionCallErrorSymbolTable.checkError();
+        if (tamaraError){
+            FunctionCallErrorException error = new FunctionCallErrorException(
+                    functionCallErrorSymbolTable.getName(),
+                    ctx.start.getLine(),
+                    ctx.start.getCharPositionInLine());
+
+            ErrorHandler.logFunctionCallError(error);
+        }
+>>>>>>> b8b033330c02b5d4b4abb1409c6b13ebf666ea47
         //System.out.println(app.toString());
 
         return app;
@@ -228,6 +244,8 @@ public class AngularVisitor extends AngularParserBaseVisitor {
             }
         }
 
+        functionCallErrorSymbolTable.addItemFunctionName(ctx.IDENTIFIER().getText());
+
         return classBodyFunc;
     }
 
@@ -327,6 +345,9 @@ public class AngularVisitor extends AngularParserBaseVisitor {
             functionCall.setFunctionCallBody((FunctionCallBody) visit(ctx.functionCallBody()));
 
         functionCall.setExpression((Expression) visit(ctx.expression()));
+
+        functionCallErrorSymbolTable.addItemFunctionCall(functionCall.getExpression().toString());
+//
         return functionCall;
     }
 
