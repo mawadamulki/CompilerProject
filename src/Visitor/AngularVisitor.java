@@ -18,6 +18,7 @@ public class AngularVisitor extends AngularParserBaseVisitor {
 
     SelectorCollisionsSymbolTable selectorCollisionsSymbolTable = new SelectorCollisionsSymbolTable();
 
+
     @Override
     public App visitApp(AngularParser.AppContext ctx) {
         App app = new App();

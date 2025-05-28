@@ -14,7 +14,6 @@ import static org.antlr.v4.runtime.CharStreams.fromFileName;
 public class Main {
 
     public static void main(String args[]) throws IOException {
-        System.out.println("Hello mawada you are fantastic!");
 
 
         String source = "C:\\Users\\ROG STRIX\\IdeaProjects\\Compiler1ProjectComplete\\src\\samples\\sampleForSelectorCollisionError";
