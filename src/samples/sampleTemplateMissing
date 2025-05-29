@@ -1,0 +1,35 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+interface Todo {
+  id: number;
+  text: string;
+  completed: boolean;
+}
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, FormsModule]
+
+})
+export class AppComponent {
+  todos: Todo[] = [];
+  newTodoText = '';
+
+  addTodo() {
+    if (this.newTodoText.trim()) {
+      this.todos.push({
+        id: Date.now(),
+        text: this.newTodoText.trim(),
+        completed: false
+      });
+      this.newTodoText = '';
+    }
+  }
+
+  deleteTodo(todo: Todo) {
+    this.todos = this.todos.filter(t => t.id !== todo.id);
+  }
+}

@@ -8,8 +8,6 @@ import AST.ComponentDecleration.HTML.Style.*;
 import antlr.AngularParser;
 import antlr.AngularParserBaseVisitor;
 import SemanticErrors.*;
-
-
 import java.util.List;
 import java.util.ArrayList;
 
@@ -17,6 +15,8 @@ import java.util.ArrayList;
 public class AngularVisitor extends AngularParserBaseVisitor {
 
     SelectorCollisionsSymbolTable selectorCollisionsSymbolTable = new SelectorCollisionsSymbolTable();
+    TemplateMissingSymbolTable templateMissingSymbolTable = new TemplateMissingSymbolTable();
+
 
     @Override
     public App visitApp(AngularParser.AppContext ctx) {
@@ -400,6 +400,16 @@ public class AngularVisitor extends AngularParserBaseVisitor {
             if(ctx.componentdata(i) != null)
                 appComponent.getComponentData().add((ComponentData) visit(ctx.componentdata(i)));
 
+
+        int checkMissingTemplate =templateMissingSymbolTable.templateSize();
+        if(checkMissingTemplate==0){
+            TemplateMissingException error=new TemplateMissingException(
+                    ctx.start.getLine(),
+                    ctx.start.getCharPositionInLine());
+
+            ErrorHandler.logTemplateMissing(error);
+        }
+
         return appComponent;
     }
 
@@ -488,6 +498,7 @@ public class AngularVisitor extends AngularParserBaseVisitor {
         ComponentTamplateUrl componentTamplateUrl = new ComponentTamplateUrl();
 
         componentTamplateUrl.setString(ctx.STRING().getText());
+        templateMissingSymbolTable.addItem(ctx.TEMPLATEURL().getText());
 
         return componentTamplateUrl;
     }
@@ -501,6 +512,7 @@ public class AngularVisitor extends AngularParserBaseVisitor {
     @Override
     public ComponentData visitTemplateDecl(AngularParser.TemplateDeclContext ctx) {
         ComponentTamplate componentTamplate = new ComponentTamplate();
+        templateMissingSymbolTable.addItem(ctx.TEMPLATE().getText());
 
         for( int i = 0 ; i < ctx.html().size() ; i++ )
             if(ctx.html(i) != null)
