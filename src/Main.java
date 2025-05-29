@@ -16,7 +16,7 @@ public class Main {
     public static void main(String args[]) throws IOException {
 
 
-        String source = "C:\\Users\\DELL\\IdeaProjects\\CompilerProject\\src\\samples\\sampleForSelectorCollisionError";
+        String source = "C:\\Users\\DELL\\IdeaProjects\\CompilerProject\\src\\samples\\sampleFunctionCallError";
         CharStream cs = fromFileName(source);
         AngularLexer lexer = new AngularLexer(cs);
         CommonTokenStream token = new CommonTokenStream(lexer);

@@ -23,4 +23,11 @@ public class ErrorHandler {
             System.err.println("Failed to write to error log: " + ioException.getMessage());
         }
     }
+    public static void logFunctionCallError(FunctionCallErrorException e) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(ERROR_LOG_FILE, true))) {
+            writer.println("[" + LocalDateTime.now() + "] " + e.getFormattedMessage());
+        } catch (IOException ioException) {
+            System.err.println("Failed to write to error log: " + ioException.getMessage());
+        }
+    }
 }
