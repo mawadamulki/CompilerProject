@@ -16,6 +16,11 @@ public class AngularVisitor extends AngularParserBaseVisitor {
 
     SelectorCollisionsSymbolTable selectorCollisionsSymbolTable = new SelectorCollisionsSymbolTable();
     TemplateMissingSymbolTable templateMissingSymbolTable = new TemplateMissingSymbolTable();
+<<<<<<< HEAD
+    BindingErrorSymbolTable  bindingErrorSymbolTable = new BindingErrorSymbolTable();
+=======
+    FunctionCallErrorSymbolTable functionCallErrorSymbolTable =new FunctionCallErrorSymbolTable();
+>>>>>>> b8b033330c02b5d4b4abb1409c6b13ebf666ea47
 
 
     @Override
@@ -36,6 +41,30 @@ public class AngularVisitor extends AngularParserBaseVisitor {
             }
         }
 
+<<<<<<< HEAD
+        boolean error = bindingErrorSymbolTable.checkError();
+        if(error){
+            BindingErrorException errors = new BindingErrorException(
+                    bindingErrorSymbolTable.getName(),
+                    ctx.start.getLine(),
+                    ctx.start.getCharPositionInLine()
+            );
+
+            ErrorHandler.logBindingError(errors);
+        }
+
+
+=======
+        boolean tamaraError=functionCallErrorSymbolTable.checkError();
+        if (tamaraError){
+            FunctionCallErrorException error = new FunctionCallErrorException(
+                    functionCallErrorSymbolTable.getName(),
+                    ctx.start.getLine(),
+                    ctx.start.getCharPositionInLine());
+
+            ErrorHandler.logFunctionCallError(error);
+        }
+>>>>>>> b8b033330c02b5d4b4abb1409c6b13ebf666ea47
         //System.out.println(app.toString());
 
         return app;
@@ -187,6 +216,8 @@ public class AngularVisitor extends AngularParserBaseVisitor {
         ClassBodyVariable classBodyVariable = new ClassBodyVariable();
 
         classBodyVariable.setIdentifier(ctx.IDENTIFIER().getText());
+        bindingErrorSymbolTable.addItemvarClass(ctx.IDENTIFIER().getText());
+
         classBodyVariable.setExpression((Expression) visit(ctx.expression()));
 
         return classBodyVariable;
@@ -212,6 +243,8 @@ public class AngularVisitor extends AngularParserBaseVisitor {
                 classBodyFunc.getFunctionBody().add((FunctionBody) visit(ctx.functionBody(i)));
             }
         }
+
+        functionCallErrorSymbolTable.addItemFunctionName(ctx.IDENTIFIER().getText());
 
         return classBodyFunc;
     }
@@ -312,6 +345,9 @@ public class AngularVisitor extends AngularParserBaseVisitor {
             functionCall.setFunctionCallBody((FunctionCallBody) visit(ctx.functionCallBody()));
 
         functionCall.setExpression((Expression) visit(ctx.expression()));
+
+        functionCallErrorSymbolTable.addItemFunctionCall(functionCall.getExpression().toString());
+//
         return functionCall;
     }
 
@@ -639,6 +675,8 @@ public class AngularVisitor extends AngularParserBaseVisitor {
     public TagBody visitTagBodyExpression(AngularParser.TagBodyExpressionContext ctx) {
         TagBodyExpression tagBodyExpression = new TagBodyExpression();
         tagBodyExpression.setExpression((Expression) visit(ctx.expression()));
+
+        bindingErrorSymbolTable.addItemVarComponent(tagBodyExpression.getExpression().toString());
         return tagBodyExpression;
     }
 

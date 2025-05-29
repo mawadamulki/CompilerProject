@@ -16,7 +16,15 @@ public class Main {
     public static void main(String args[]) throws IOException {
 
 
+<<<<<<< HEAD
         String source = "C:\\Users\\ROG STRIX\\IdeaProjects\\Compiler1ProjectComplete\\src\\samples\\sampleTemplateMissing";
+=======
+<<<<<<< HEAD
+        String source = "C:\\Users\\ROG STRIX\\IdeaProjects\\Compiler1ProjectComplete\\src\\samples\\sampleBindingError";
+=======
+        String source = "C:\\Users\\DELL\\IdeaProjects\\CompilerProject\\src\\samples\\sampleFunctionCallError";
+>>>>>>> b8b033330c02b5d4b4abb1409c6b13ebf666ea47
+>>>>>>> 75074c5546c7505d0d968690736df56ca2101084
         CharStream cs = fromFileName(source);
         AngularLexer lexer = new AngularLexer(cs);
         CommonTokenStream token = new CommonTokenStream(lexer);
