@@ -19,7 +19,7 @@ public class TemplateMissingException extends Exception {
     }
 
     public String getFormattedMessage() {
-        return String.format("[Line %d:%d] Component '%s' is missing both template and templateUrl",
+        return String.format("[Line %d:%d] Component is missing both template and templateUrl",
                 line, charPosition);
     }
 }
