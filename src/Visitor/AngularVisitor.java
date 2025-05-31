@@ -16,11 +16,9 @@ public class AngularVisitor extends AngularParserBaseVisitor {
 
     SelectorCollisionsSymbolTable selectorCollisionsSymbolTable = new SelectorCollisionsSymbolTable();
     TemplateMissingSymbolTable templateMissingSymbolTable = new TemplateMissingSymbolTable();
-<<<<<<< HEAD
     BindingErrorSymbolTable  bindingErrorSymbolTable = new BindingErrorSymbolTable();
-=======
-    FunctionCallErrorSymbolTable functionCallErrorSymbolTable =new FunctionCallErrorSymbolTable();
->>>>>>> b8b033330c02b5d4b4abb1409c6b13ebf666ea47
+    FunctionCallErrorSymbolTable functionCallErrorSymbolTable = new FunctionCallErrorSymbolTable();
+    ConflictingAliasesSymbolTable conflictingAliasesSymbolTable = new ConflictingAliasesSymbolTable();
 
 
     @Override
@@ -41,7 +39,7 @@ public class AngularVisitor extends AngularParserBaseVisitor {
             }
         }
 
-<<<<<<< HEAD
+
         boolean error = bindingErrorSymbolTable.checkError();
         if(error){
             BindingErrorException errors = new BindingErrorException(
@@ -54,17 +52,17 @@ public class AngularVisitor extends AngularParserBaseVisitor {
         }
 
 
-=======
+
         boolean tamaraError=functionCallErrorSymbolTable.checkError();
         if (tamaraError){
-            FunctionCallErrorException error = new FunctionCallErrorException(
+            FunctionCallErrorException errorCall = new FunctionCallErrorException(
                     functionCallErrorSymbolTable.getName(),
                     ctx.start.getLine(),
                     ctx.start.getCharPositionInLine());
 
-            ErrorHandler.logFunctionCallError(error);
+            ErrorHandler.logFunctionCallError(errorCall);
         }
->>>>>>> b8b033330c02b5d4b4abb1409c6b13ebf666ea47
+
         //System.out.println(app.toString());
 
         return app;
@@ -217,6 +215,18 @@ public class AngularVisitor extends AngularParserBaseVisitor {
 
         classBodyVariable.setIdentifier(ctx.IDENTIFIER().getText());
         bindingErrorSymbolTable.addItemvarClass(ctx.IDENTIFIER().getText());
+
+        boolean isError = conflictingAliasesSymbolTable.checkIfExist(ctx.IDENTIFIER().getText());
+        if(isError){
+            ConflictingAliasesException error = new ConflictingAliasesException(
+                    ctx.IDENTIFIER().getText(),
+                    ctx.start.getLine(),
+                    ctx.start.getCharPositionInLine()
+            );
+            ErrorHandler.logConflictingAliases(error);
+        }
+        conflictingAliasesSymbolTable.addItem(ctx.IDENTIFIER().getText());
+
 
         classBodyVariable.setExpression((Expression) visit(ctx.expression()));
 

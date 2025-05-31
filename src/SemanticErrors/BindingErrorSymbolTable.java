@@ -8,6 +8,7 @@ public class BindingErrorSymbolTable {
     List<String> varClass = new ArrayList<String>();
     boolean isError = false;
     String name;
+    int line;
 
     public String getName() {
         return name;
@@ -29,9 +30,18 @@ public class BindingErrorSymbolTable {
         this.varClass = varClass;
     }
 
+    public int getLine() {
+        return line;
+    }
+
+    public void setLine(int line) {
+        this.line = line;
+    }
+
     public void addItemVarComponent(String string){
         varComponent.add(string);
     }
+
     public void addItemvarClass(String string){
         varClass.add(string);
     }

@@ -25,7 +25,7 @@ public class BindingErrorException extends Exception{
     }
 
     public String getFormattedMessage() {
-        return String.format("[Line %d:%d] BindingError: %s is already defined",
+        return String.format("[Line %d:%d] BindingError: %s Variable not defined",
                 line, charPosition, name);
     }
 }

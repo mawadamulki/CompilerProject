@@ -1,11 +1,1 @@
-<<<<<<< HEAD
-[2025-05-26T21:19:27.810345400] [Line 10:2] Selector collision: 'app-root' is already defined
-[2025-05-26T21:45:01.228763300] [Line 10:2] Selector collision: 'app-root' is already defined
-[2025-05-28T13:43:53.983337] [Line 11:0] Component is missing both template and templateUrl
-=======
-[2025-05-29T12:53:14.839968] [Line 1:0] Function Call Error : increment is not a function
-[2025-05-29T12:53:35.527301400] [Line 1:0] Function Call Error : increment is not a function
-[2025-05-29T12:55:28.678152100] [Line 1:0] Function Call Error : increment is not a function
-[2025-05-29T13:01:40.881078600] [Line 1:0] Function Call Error : decrement is not a function
-[2025-05-29T13:02:06.448356] [Line 1:0] Function Call Error : reset is not a function
->>>>>>> 75074c5546c7505d0d968690736df56ca2101084
+[2025-05-31T10:08:23.392904700] [Line 41:2] Attribute Conflicting Error: detailsTitle is already defined
